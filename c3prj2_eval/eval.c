@@ -2,48 +2,206 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
-
+//c3
+//note we want descending order, so we
+//compare backwards
 int card_ptr_comp(const void * vp1, const void * vp2) {
-  return 0;
-}
 
+  const card_t * const * c1p = vp1;
+  const card_t * const * c2p = vp2;
+  const card_t * c1 = *c1p;
+  const card_t * c2 = *c2p;
+  if (c1->value == c2->value) {
+    return c2->suit - c1->suit;
+  }
+  return c2->value - c1->value;
+}
+//c3
 suit_t flush_suit(deck_t * hand) {
+
+  int counts[NUM_SUITS] = {0};
+  for(size_t i = 0; i < hand->n_cards; i++) {
+    counts[hand->cards[i]->suit]++;
+  }
+  for (suit_t i= SPADES; i < NUM_SUITS; i++) {
+    if(counts[i] >=5) {
+      return i;
+    }
+  }
   return NUM_SUITS;
 }
-
+//c3-they already did this or saw it..?
 unsigned get_largest_element(unsigned * arr, size_t n) {
-  return 0;
-}
 
+  if (n == 0){
+    return 0;
+  }
+  unsigned m = arr[0];
+  for(size_t i = 1; i < n ; i++) {
+    if (arr[i] > m){
+      m = arr[i];
+    }
+  }
+  return m;
+}
+//c3
 size_t get_match_index(unsigned * match_counts, size_t n,unsigned n_of_akind){
 
-  return 0;
-}
-ssize_t  find_secondary_pair(deck_t * hand,
-			     unsigned * match_counts,
-			     size_t match_idx) {
-  return -1;
+  for(size_t i = 0; i < n; i++) {
+    if (match_counts[i] == n_of_akind){
+      return i;
+    }
+  }
+  fprintf(stderr,"Couldnt find the matches I thought I had\n");
+  abort();
 }
 
+static int is_n_length_straight_at(deck_t * hand, size_t index, suit_t fs, int n) {
+  int found = 0;
+  if (index > hand->n_cards - n) {
+    return 0;
+  }
+  unsigned v = hand->cards[index]->value;
+  while(index < hand->n_cards) {
+    if (hand->cards[index]->value == v) {
+      //this is the right value
+      if (fs == NUM_SUITS || hand->cards[index]->suit == fs) {
+	found++;
+	v--;
+	if (found == n) {
+	  return 1;
+	}
+      }
+    }
+    else if (hand->cards[index]->value != v+1) {
+      //we might have A A A K, and see the first A,
+      //then start looking for K, but need to be ok with
+      //seeing the other As, so we ignore v+1
+      //anything else is not a straight
+      return 0;
+    }
+    index++;
+  }
+  return 0;
+}
+static int is_ace_low_straight_at(deck_t * hand, size_t index, suit_t fs) {
+  assert(hand->cards[index]->value == VALUE_ACE);
+  while(index < hand->n_cards && hand->cards[index]->value !=5) {
+    index++;
+  }
+  return is_n_length_straight_at(hand,index,fs, 4);
+}
+//c3
 int is_straight_at(deck_t * hand, size_t index, suit_t fs) {
-  return 0;
-}
 
+  if (fs != NUM_SUITS) {
+    if(hand->cards[index]->suit != fs) {
+      return 0;
+    }
+  }
+  if (hand->cards[index]->value == VALUE_ACE) {
+    if (is_ace_low_straight_at(hand,index, fs)) {
+      return -1;
+    }
+  }
+  return is_n_length_straight_at(hand,index,fs,5);
+}
+//c3
 hand_eval_t build_hand_from_match(deck_t * hand,
 				  unsigned n,
 				  hand_ranking_t what,
 				  size_t idx) {
 
+  assert(n<=4);
   hand_eval_t ans;
+  ans.ranking = what;
+  //copy cards that made match (pair, etc)
+  for(size_t i = 0; i < n; i++) {
+    ans.cards[i] = hand->cards[i+idx];
+  }
+  for(size_t i = n; i < 5; i++) {
+    size_t from = i-n;
+    if (from >= idx) {
+      from = i;
+    }
+    ans.cards[i] = hand->cards[from];
+  }
   return ans;
 }
+//c3
+ssize_t  find_secondary_pair(deck_t * hand,
+			     unsigned * match_counts,
+			     size_t match_idx) {
 
-
+  ssize_t best_ind = -1;
+  unsigned match_val = hand->cards[match_idx]->value;
+  for(size_t i = 0; i < hand->n_cards; i++) {
+    if (match_counts[i] > 1 && hand->cards[i]->value != match_val) {
+      //another pair
+      if (best_ind == -1 ||
+	  hand->cards[i]->value > hand->cards[best_ind]->value) {
+	best_ind = i;
+      }
+    }
+  }
+  return best_ind;
+}
+//c3
 int compare_hands(deck_t * hand1, deck_t * hand2) {
 
+  qsort(hand1->cards, hand1->n_cards, sizeof(hand1->cards[0]), card_ptr_comp);
+  qsort(hand2->cards, hand2->n_cards, sizeof(hand2->cards[0]), card_ptr_comp);
+
+  hand_eval_t h1 = evaluate_hand(hand1);
+  hand_eval_t h2 = evaluate_hand(hand2);
+#ifdef VERBOSE_COMPARE
+  printf("Hand 1 is ");
+  print_hand(hand1);
+  printf("which is a %s [", ranking_to_string(h1.ranking));
+  for(int i =0 ; i < 5; i++) {
+    printf("%c%c ", value_letter(*h1.cards[i]), suit_letter(*h1.cards[i]));
+  }
+  printf("]\n");
+  printf("Hand 2 is ");
+  print_hand(hand2);
+  printf("which is a %s [", ranking_to_string(h2.ranking));
+  for(int i =0 ; i < 5; i++) {
+    printf("%c%c ", value_letter(*h2.cards[i]), suit_letter(*h2.cards[i]));
+  }
+  printf("]  ");
+
+#endif
+  if (h1.ranking != h2.ranking){
+#ifdef VERBOSE_COMPARE
+    if (h2.ranking > h1.ranking) {
+      printf( " {Hand 1 wins: ranking} \n");
+    }
+    else {
+      printf( " {Hand 2 wins: ranking} \n");
+    }
+#endif
+    return h2.ranking - h1.ranking;
+  }
+  //break ties by card values
+  for(size_t i = 0; i < 5; i++) {
+    if (h1.cards[i]->value != h2.cards[i]->value) {
+#ifdef VERBOSE_COMPARE
+      if (h1.cards[i]->value > h2.cards[i]->value) {
+	printf( " {Hand 1 wins: %zu card} \n", i);
+      }
+      else {
+	printf( " {Hand 2 wins: %zu card} \n", i);
+      }
+#endif
+
+      return h1.cards[i]->value - h2.cards[i]->value;
+    }
+  }
+#ifdef VERBOSE_COMPARE
+  printf("  {Tie}\n");
+#endif
   return 0;
 }
-
 
 
 //You will write this function in Course 4.
@@ -177,7 +335,7 @@ hand_eval_t evaluate_hand(deck_t * hand) {
       ans.cards[4] = hand->cards[2];
     }
     else {       //e.g., A A K K Q
-      ans.cards[4] = hand->cards[4];
+      ans.cards[4] = hand->cards[4]; 
     }
     return ans;
   }
@@ -186,3 +344,4 @@ hand_eval_t evaluate_hand(deck_t * hand) {
   }
   return build_hand_from_match(hand, 0, NOTHING, 0);
 }
+
