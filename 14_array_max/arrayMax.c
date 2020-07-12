@@ -2,7 +2,19 @@
 #include <stdlib.h>
 
 int * arrayMax(int * array, int n) {
-  return NULL;
+  int * arrayMax;
+  if (n == 0){
+    return NULL;
+  }
+  else {
+    arrayMax = array;
+    for (int i = 1; i < n; i++) {
+      if (array[i] > *arrayMax){
+	arrayMax = array + i;
+      }
+    }
+    return arrayMax;
+  }
 }
 
 void doTest(int * array, int n) {
@@ -40,6 +52,6 @@ int main(void) {
   doTest (array3, 6);
   doTest (NULL, 0);
   doTest (array1, 0);
-  
+
   return EXIT_SUCCESS;
 }
