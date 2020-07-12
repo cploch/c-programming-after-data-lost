@@ -1,0 +1,123 @@
+Grading at Sun Jul 12 23:32:29 UTC 2020
+**Testing broken implementation 10 **
+-------------------------------------
+
+3 
+1 
+5 
+0 
+4 
+Array3 failed, answer = 5 
+
+**Testing broken implementation 11 **
+-------------------------------------
+
+4 
+2 
+6 
+0 
+5 
+Array1 failed, answer = 4 
+
+**Testing broken implementation 1 **
+-------------------------------------
+
+6 
+1 
+6 
+0 
+4 
+Array1 failed, answer = 6 
+
+**Testing broken implementation 2 **
+-------------------------------------
+
+3 
+1 
+6 
+1 
+2 
+Array4 failed, answer = 1 
+
+**Testing broken implementation 3 **
+-------------------------------------
+
+3 
+1 
+7 
+0 
+5 
+Array3 failed, answer = 7 
+
+**Testing broken implementation 4 **
+-------------------------------------
+
+3 
+1 
+6 
+1 
+4 
+Array4 failed, answer = 1 
+
+**Testing broken implementation 5 **
+-------------------------------------
+
+5 
+1 
+7 
+0 
+11 
+Array1 failed, answer = 5 
+
+**Testing broken implementation 6 **
+-------------------------------------
+
+3 
+0 
+6 
+0 
+4 
+Array2 failed, answer = 0 
+
+**Testing broken implementation 7 **
+-------------------------------------
+
+18446744073709551615 
+18446744073709551615 
+5 
+0 
+18446744073709551615 
+Array1 failed, answer = 18446744073709551615 
+
+**Testing broken implementation 8 **
+-------------------------------------
+
+1 
+1 
+1 
+0 
+1 
+Array1 failed, answer = 1 
+
+**Testing broken implementation 9 **
+-------------------------------------
+
+3 
+1 
+6 
+0 
+2 
+Array5 failed, answer = 2 
+
+**Testing correct implementation **
+-------------------------------------
+
+3 
+1 
+6 
+0 
+4 
+Array succeeded
+All test programs were handled correctly
+
+Overall Grade: PASSED
