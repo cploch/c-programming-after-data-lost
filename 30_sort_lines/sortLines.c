@@ -59,7 +59,7 @@ int main(int argc, char ** argv) {
       //open the file
       FILE * f = fopen(argv[num_args],"r");
       if (f == NULL){
-	printf("Error: fopen failed, meaning file did not exist.");
+	fprintf(stderr, "Error: fopen failed, meaning file did not exist.");
 	return EXIT_FAILURE;
       }
       //read all lines of data from file
@@ -74,7 +74,7 @@ int main(int argc, char ** argv) {
     }
   }
   else {
-    printf("Error: argc does not fall into either the = 1 case or the > 1 case.");
+    fprintf(stderr, "Error: argc does not fall into either the = 1 case or the > 1 case.");
     return EXIT_FAILURE;
   }
   return EXIT_SUCCESS;
