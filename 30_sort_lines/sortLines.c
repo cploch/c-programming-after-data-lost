@@ -44,16 +44,6 @@ void printData(char ** array, size_t num_lines) {
 }
 
 int main(int argc, char ** argv) {
-  
-  //WRITE YOUR CODE HERE!
-  /* This is code for if argc = 0, which I don't think is possible.
-  if (argc == 0){
-    printf("Error: ");
-    return EXIT_FAILURE;
-  }
-
-  else if (argc == 1){
-  */
   size_t num_lines = 0;
   if (argc == 1){
     //read lines from standard input
@@ -62,24 +52,24 @@ int main(int argc, char ** argv) {
     sortData(array, num_lines);
     //print the results
     printData(array, num_lines);
-    //free memory
-    //free(array);
   }
   else if (argc > 1){
+    //for each argument:
     for (int num_args = 1; num_args < argc; num_args ++){
-      //for each argument:
-      ///open the file
+      //open the file
       FILE * f = fopen(argv[num_args],"r");
-      ///read all lines of data from file
+      if (f == NULL){
+	printf("Error: fopen failed, meaning file did not exist.");
+	return EXIT_FAILURE;
+      }
+      //read all lines of data from file
       size_t num_lines = 0;
       char ** array = readInLines(f, &num_lines); 
-      ///sort the lines
+      //sort the lines
       sortData(array, num_lines);
-      ///print the results
+      //print the results
       printData(array, num_lines);
-      ///free the memory
-      //free(array);
-      ///close the file
+      //close the file
       fclose(f);
     }
   }
