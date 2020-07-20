@@ -167,9 +167,19 @@ int checkWin(board_t * b) {
 
 void freeBoard(board_t * b) {
   //WRITE ME!
+  int size  = sizeof(*b->board)/sizeof(**b->board);  
+  for (int i = 0; i < size; i++){
+    free(b->board[i]);
+  }
   free(b->board);
   free(b);
-}
+  /* board_t * newBoard = malloc(sizeof(*newBoard));
+  newBoard->board = malloc(h*sizeof(*newBoard->board));
+  for (int i =0; i < h; i++){
+    newBoard->board[i] = malloc(w*sizeof(**newBoard->board));
+  } */
+} 
+
 
 int readInt(char ** linep, size_t * lineszp) {
   if (getline (linep, lineszp, stdin) == -1) {
