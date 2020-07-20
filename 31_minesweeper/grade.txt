@@ -1,97 +1,24 @@
-Grading at Mon Jul 20 09:53:37 UTC 2020
+Grading at Mon Jul 20 10:52:38 UTC 2020
 Attempting to compile minesweeper.c
 #################################################
 testcase1:
 Your output is correct
-  - Valgrind reported errors
-valgrind was not clean
-==459== Memcheck, a memory error detector
-==459== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
-==459== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
-==459== 
-==459== Parent PID: 458
-==459== 
-==459== 
-==459== HEAP SUMMARY:
-==459==     in use at exit: 12 bytes in 1 blocks
-==459==   total heap usage: 8 allocs, 7 frees, 8,396 bytes allocated
-==459== 
-==459== 12 bytes in 1 blocks are definitely lost in loss record 1 of 1
-==459==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==459==    by 0x400AC7: makeBoard (in /graderhome/work/31_minesweeper/minesweeper)
-==459==    by 0x401B1E: main (in /graderhome/work/31_minesweeper/minesweeper)
-==459== 
-==459== LEAK SUMMARY:
-==459==    definitely lost: 12 bytes in 1 blocks
-==459==    indirectly lost: 0 bytes in 0 blocks
-==459==      possibly lost: 0 bytes in 0 blocks
-==459==    still reachable: 0 bytes in 0 blocks
-==459==         suppressed: 0 bytes in 0 blocks
-==459== 
-==459== For counts of detected and suppressed errors, rerun with: -v
-==459== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+  - Valgrind was clean (no errors, no memory leaks)
+valgrind was clean
 #################################################
 testcase2:
-valgrind reported memory errors
+Your output is correct
+  - Valgrind was clean (no errors, no memory leaks)
+valgrind was clean
 #################################################
 testcase3:
 Your output is correct
-  - Valgrind reported errors
-valgrind was not clean
-==484== Memcheck, a memory error detector
-==484== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
-==484== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
-==484== 
-==484== Parent PID: 483
-==484== 
-==484== 
-==484== HEAP SUMMARY:
-==484==     in use at exit: 640 bytes in 16 blocks
-==484==   total heap usage: 27 allocs, 11 frees, 9,320 bytes allocated
-==484== 
-==484== 640 bytes in 16 blocks are definitely lost in loss record 1 of 1
-==484==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==484==    by 0x400AC7: makeBoard (in /graderhome/work/31_minesweeper/minesweeper)
-==484==    by 0x401B1E: main (in /graderhome/work/31_minesweeper/minesweeper)
-==484== 
-==484== LEAK SUMMARY:
-==484==    definitely lost: 640 bytes in 16 blocks
-==484==    indirectly lost: 0 bytes in 0 blocks
-==484==      possibly lost: 0 bytes in 0 blocks
-==484==    still reachable: 0 bytes in 0 blocks
-==484==         suppressed: 0 bytes in 0 blocks
-==484== 
-==484== For counts of detected and suppressed errors, rerun with: -v
-==484== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+  - Valgrind was clean (no errors, no memory leaks)
+valgrind was clean
 #################################################
 testcase4:
 Your output is correct
-  - Valgrind reported errors
-valgrind was not clean
-==505== Memcheck, a memory error detector
-==505== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
-==505== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
-==505== 
-==505== Parent PID: 504
-==505== 
-==505== 
-==505== HEAP SUMMARY:
-==505==     in use at exit: 320 bytes in 8 blocks
-==505==   total heap usage: 15 allocs, 7 frees, 8,816 bytes allocated
-==505== 
-==505== 320 bytes in 8 blocks are definitely lost in loss record 1 of 1
-==505==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==505==    by 0x400AC7: makeBoard (in /graderhome/work/31_minesweeper/minesweeper)
-==505==    by 0x401B1E: main (in /graderhome/work/31_minesweeper/minesweeper)
-==505== 
-==505== LEAK SUMMARY:
-==505==    definitely lost: 320 bytes in 8 blocks
-==505==    indirectly lost: 0 bytes in 0 blocks
-==505==      possibly lost: 0 bytes in 0 blocks
-==505==    still reachable: 0 bytes in 0 blocks
-==505==         suppressed: 0 bytes in 0 blocks
-==505== 
-==505== For counts of detected and suppressed errors, rerun with: -v
-==505== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+  - Valgrind was clean (no errors, no memory leaks)
+valgrind was clean
 
-Overall Grade: D
+Overall Grade: A
