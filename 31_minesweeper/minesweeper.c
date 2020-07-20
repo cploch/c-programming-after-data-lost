@@ -167,8 +167,8 @@ int checkWin(board_t * b) {
 
 void freeBoard(board_t * b) {
   //WRITE ME!
-  int size  = sizeof(*b->board)/sizeof(**b->board);  
-  for (int i = 0; i < size; i++){
+  //  int size  = sizeof(*b->board)/sizeof(**b->board);  
+  for (int i = 0; i < b->height; i++){
     free(b->board[i]);
   }
   free(b->board);
