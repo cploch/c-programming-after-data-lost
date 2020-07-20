@@ -126,8 +126,9 @@ int countMines(board_t * b, int x, int y) {
   int mine_count = 0;
   for (int ycoord = -1; ycoord < 2; ycoord++){
     for (int xcoord = -1; xcoord < 2; xcoord++){
-      if (((x+xcoord)<b->width) && ((x+xcoord>-1)) && ((y+ycoord)<b->height) && ((y+ycoord)>-1) && ((xcoord!=0)||(ycoord!=0)) && ((b->board[y+ycoord][x+xcoord] == KNOWN_MINE) || (b->board[y+ycoord][x+xcoord] == HAS_MINE))){//IS_MINE(b->board[y+ycoord][x+xcoord])){
-	mine_count++;
+      // if (((x+xcoord)<b->width) && ((x+xcoord>-1)) && ((y+ycoord)<b->height) && ((y+ycoord)>-1) && ((xcoord!=0)||(ycoord!=0)) && ((b->board[y+ycoord][x+xcoord] == KNOWN_MINE) || (b->board[y+ycoord][x+xcoord] == HAS_MINE))){//IS_MINE(b->board[y+ycoord][x+xcoord])){
+      if (((x+xcoord)<b->width) && ((x+xcoord>-1)) && ((y+ycoord)<b->height) && ((y+ycoord)>-1) && (IS_MINE(b->board[y+ycoord][x+xcoord]))){
+      mine_count++;
       }
     }
   }
