@@ -52,9 +52,11 @@ kvarray_t * readKVs(const char * fname) {
     strncpy(answer->array[num_lines]->key, line, size);*/
     num_lines++;
     answer->length = num_lines;
+    free(line);
     line = NULL;
     size = 0;      
   }
+  free(line);
   //close the file
   int result = fclose(f);
   assert(result == 0);
