@@ -25,4 +25,6 @@ void printKVs(kvarray_t * pairs);
 
 char * lookupValue(kvarray_t * pairs, const char * key);
 
+void stripNewline(char *str);
+
 #endif
