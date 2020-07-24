@@ -48,7 +48,7 @@ void printCounts(counts_t * c, FILE * outFile) {
     }
   }
   if (foundNull == 1){
-    fprintf(outFile, "<unknown>: %d\n", c->array[indexNull]->count);
+    fprintf(outFile, "<unknown> : %d\n", c->array[indexNull]->count);
   }
 }
 
