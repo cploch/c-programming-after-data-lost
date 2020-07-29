@@ -114,3 +114,54 @@ card_t card_from_num(unsigned c) {
   return ans;
 }
 
+// Course 4 Prj 1 functions follow below:
+void add_card_to(deck_t * deck, card_t c) {
+  /*Add the particular card to the given deck (which will
+  involve reallocing the array of cards in that deck).
+  */
+  deck->n_cards++;
+  deck->cards = realloc(deck->cards, sizeof(*deck->cards)*(deck->n_cards));
+  deck->cards[deck->n_cards - 1] = malloc(sizeof(*(deck->cards[deck->n_cards - 1])));
+  deck->cards[deck->n_cards - 1]->value = c.value;
+  deck->cards[deck->n_cards - 1]->suit = c.suit;
+}
+
+card_t * add_empty_card(deck_t * deck) {
+  card_t emptyCard;
+  emptyCard.value = 0;
+  emptyCard.suit = 0;
+  add_card_to(deck, emptyCard);
+  return deck->cards[deck->n_cards - 1];
+}
+
+
+unsigned num_from_card(card_t card) {
+  assert_card_valid(c);
+  unsigned answer = card.suit*13 + card.value - 2;
+  return answer;
+}
+    
+
+deck_t * make_deck_exclude(deck_t * excluded_cards) {
+  deck_t * answer = malloc(sizeof(deck_t));
+  for (int i = 0; i < 52; i++) {
+    card_t card = card_from_num(i);
+    int card_excluded = deck_contains(excluded_cards, card);
+    if (card_excluded == 1) {
+      //do nothing
+    }
+    else {
+       add_card_to(answer, card);
+    }
+  }
+  return answer;
+}
+
+deck_t * build_remaining_deck(deck_t ** hands, size_t n_hands) {
+  //build deck to exclude
+  deck_t * deck_to_exclude;
+  deck_t * answer;
+
+  //do make_deck_exclude with that deck
+
+}
